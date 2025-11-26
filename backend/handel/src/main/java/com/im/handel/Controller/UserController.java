@@ -1,11 +1,13 @@
 package com.im.handel.Controller;
 
 import com.im.handel.Entity.AdminEntity;
+import com.im.handel.Entity.UserEntity;
 import com.im.handel.Model.LoginRequest;
 import com.im.handel.Model.LoginResponse;
 import com.im.handel.Repository.AdminRepo;
+import com.im.handel.Repository.UserRepository;
 import com.im.handel.Security.JwtHelper;
-import io.micrometer.common.util.StringUtils;
+import com.im.handel.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,16 +15,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 @RestController
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -31,25 +34,31 @@ public class AdminController {
     private AuthenticationManager manager;
 
     @Autowired
-    public AdminRepo adminRepo;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtHelper helper;
 
-    @PostMapping("/register")
-    public ResponseEntity<AdminEntity> register(@Valid @RequestBody AdminEntity adminEntity) {
-        adminEntity.setAdminName(adminEntity.getAdminName());
-        adminEntity.setAdminEmailId(adminEntity.getAdminEmailId());
-        adminEntity.setPhone(adminEntity.getPhone());
-        adminEntity.setPassword(passwordEncoder.encode(adminEntity.getPassword()));
-        adminEntity.setRole("ADMIN");
-        adminRepo.save(adminEntity);
+    @Autowired
+    private UserService userService;
 
-        AdminEntity saved = adminRepo.save(adminEntity);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    public AdminRepo adminRepo;
+
+
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserEntity user) {
+
+        try {
+            UserEntity saved = userService.registerUser(user);
+            return ResponseEntity.ok(saved);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     private String doAuthenticate(String email, String password) {
@@ -57,11 +66,11 @@ public class AdminController {
         System.out.println("Attempting authentication for email: " + email);
 
         // 1. Find admin from DB
-        AdminEntity adminEntity = adminRepo.findByAdminEmailId(email)
+        UserEntity userEntity = userRepository.findByEmailId(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // 2. Validate password (BCrypt)
-        if (!passwordEncoder.matches(password, adminEntity.getPassword())) {
+        if (!passwordEncoder.matches(password, userEntity.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 
@@ -79,27 +88,29 @@ public class AdminController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         String token = this.doAuthenticate(request.getEmail(), request.getPassword());
-       // UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        // UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         LoginResponse response = buildJwtResponse(request.getEmail(), token);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     private LoginResponse buildJwtResponse(String email,  String token) {
+//        AdminEntity adminEntity = adminRepo.findByAdminEmailId(email)
+//                .orElseThrow(() -> new RuntimeException("Admin not found"));
 
-        AdminEntity adminEntity = adminRepo.findByAdminEmailId(email)
-                .orElseThrow(() -> new RuntimeException("Admin not found"));
+        UserEntity userEntity = userRepository.findByEmailId(email)
+                .orElseThrow(() -> new RuntimeException("user not found"));
+
+
 
         return LoginResponse.builder()
                 .token(token)
-                .name(adminEntity.getAdminName())
-                .role("ADMIN")
+                .name(userEntity.getUserName())
+                .role("USER")
                 .message("Login successful")
                 .build();
     }
 
 
-    private boolean isAdmin(String email) {
-        return "admin@admin.com".equals(email);
-    }
+
 }
 
