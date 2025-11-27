@@ -34,6 +34,9 @@ public class AdminEntity implements UserDetails {
     @NotBlank(message = "Name is required")
     private String adminName;
 
+    @Column(name="role")
+    private String role;
+
     public AdminEntity() {
     }
 
@@ -105,5 +108,13 @@ public class AdminEntity implements UserDetails {
 
     public void setAdminName(String adminName) {
         this.adminName = adminName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
