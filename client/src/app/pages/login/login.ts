@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrls: ['./login.css'],
 })
 export class Login {
 
@@ -21,19 +21,23 @@ export class Login {
     private router: Router
   ) {}
 
-  onLogin() {
-    const body = {
-      email: this.email,
-      password: this.password
-    };
+ onLogin() {
+  const body = {
+    email: this.email,
+    password: this.password
+  };
 
-    this.auth.login(body).subscribe((res: any) => {
-      
-      if (res.status) {
+  this.auth.login(body).subscribe(
+    (res: any) => {
+
+      // No 'status' returned by backend, so check token
+      if (res && res.token) {
+
         localStorage.setItem('token', res.token);
         localStorage.setItem('role', res.role);
+        localStorage.setItem('name', res.name);
 
-        if (res.role === 'admin') {
+        if (res.role === 'ADMIN') {
           this.router.navigate(['/admin-dashboard']);
         } else {
           this.router.navigate(['/user-dashboard']);
@@ -43,9 +47,12 @@ export class Login {
         alert("Invalid login");
       }
 
-    }, error => {
-      alert("API Error");
+    },
+    error => {
+      alert(error.error?.message || "API Error");
       console.error(error);
-    });
-  }
+    }
+  );
+}
+
 }
