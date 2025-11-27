@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+
+  eureka-server:
+    build: ./eurekaService
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - handel-network
+
+  handel-service:
+    build: ./handel
+    container_name: handel-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    networks:
+      - handel-network
+
+networks:
+  handel-network:
+    driver: bridge
