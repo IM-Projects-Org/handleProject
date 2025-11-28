@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Builder
+@Data
 public class LoginResponse {
 
     private String message;
@@ -18,6 +19,7 @@ public class LoginResponse {
         this.message = message;
         this.token = token;
         this.name = name;
+        this.role = role;
     }
 
 
