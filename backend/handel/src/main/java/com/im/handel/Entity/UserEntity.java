@@ -4,11 +4,17 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "corporate_registration")
 public class UserEntity {
 
@@ -67,6 +73,5 @@ public class UserEntity {
     @Column(name="role")
     private String role;
 
-    public UserEntity() {
-    }
+
 }

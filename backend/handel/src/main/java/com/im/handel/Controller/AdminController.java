@@ -41,12 +41,11 @@ public class AdminController {
 
     @PostMapping("/register")
     public ResponseEntity<AdminEntity> register(@Valid @RequestBody AdminEntity adminEntity) {
-        adminEntity.setAdminName(adminEntity.getAdminName());
-        adminEntity.setAdminEmailId(adminEntity.getAdminEmailId());
-        adminEntity.setPhone(adminEntity.getPhone());
+//        adminEntity.setAdminName(adminEntity.getAdminName());
+//        adminEntity.setAdminEmailId(adminEntity.getAdminEmailId());
+//        adminEntity.setPhone(adminEntity.getPhone());
         adminEntity.setPassword(passwordEncoder.encode(adminEntity.getPassword()));
         adminEntity.setRole("ADMIN");
-        adminRepo.save(adminEntity);
 
         AdminEntity saved = adminRepo.save(adminEntity);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);

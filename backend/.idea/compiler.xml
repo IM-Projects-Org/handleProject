@@ -7,15 +7,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="handel" />
+        <processorPath>
+          <entry name="$PROJECT_DIR$/handel" />
+        </processorPath>
         <module name="eurekaService" />
+        <module name="eureka-service" />
+      </profile>
+      <profile name="Annotation profile for backend" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
+        </processorPath>
+        <module name="handel" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="eurekaService" options="-parameters" />
-      <module name="handel" options="-parameters" />
+      <module name="eurekaService" options="" />
+      <module name="handel" options="" />
     </option>
   </component>
 </project>

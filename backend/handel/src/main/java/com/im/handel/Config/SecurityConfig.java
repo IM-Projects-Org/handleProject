@@ -37,10 +37,10 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)   // You already created your own CorsFilter
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "admin/login",
-                                "admin/register",
-                                "user/register",
-                                "user/login"
+                                "/admin/login",
+                                "/admin/register",
+                                "/user/register",
+                                "/user/login"
 
                         ).permitAll()
                         .anyRequest().authenticated()
