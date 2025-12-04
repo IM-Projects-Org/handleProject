@@ -1,0 +1,130 @@
+<div class="flex min-h-screen">
+
+  <!-- Desktop Sidebar -->
+  <app-sidebar class="hidden md:block"></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-4 md:p-6 pb-20 md:pb-6">
+
+    <div class="p-6">
+
+      <h2 class="text-2xl font-bold mb-6 text-center">Create New Corporate</h2>
+
+      <!-- 3 Column Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+        <!-- ================= COMPANY INFO ================= -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-center">Company Info</h3>
+
+          <div class="space-y-4">
+
+            <div>
+              <label class="block font-medium mb-1">Entity Name</label>
+              <input type="text" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+            <div>
+              <label class="block font-medium mb-1">IEC Code</label>
+              <input type="text" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+            <div>
+              <label class="block font-medium mb-1">GST Certificate</label>
+              <label
+                for="gstUpload"
+                class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 inline-block"
+              >
+                Upload
+              </label>
+              <input type="file" id="gstUpload" class="hidden" />
+            </div>
+
+            <div>
+              <label class="block font-medium mb-1">Financials</label>
+              <label
+                for="finUpload"
+                class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 inline-block"
+              >
+                Upload
+              </label>
+              <input type="file" id="finUpload" class="hidden" />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ================= USERS ================= -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-center">Users</h3>
+
+          <div class="space-y-4">
+
+            <div>
+              <label class="block font-medium mb-1">Name</label>
+              <input type="text" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+            <div>
+              <label class="block font-medium mb-1">Mobile</label>
+              <input type="text" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+            <div>
+              <label class="block font-medium mb-1">Email</label>
+              <input type="email" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ================= BANK DETAILS ================= -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-center">Bank Details</h3>
+
+          <div class="space-y-4">
+
+            <div>
+              <label class="block font-medium mb-1">Beneficiary</label>
+              <input type="text" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+            <div>
+              <label class="block font-medium mb-1">A/c number</label>
+              <input type="text" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+            <div>
+              <label class="block font-medium mb-1">SWIFT Code</label>
+              <input type="text" class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= BUTTONS ================= -->
+      <div class="flex justify-center gap-6 mt-10">
+
+        <button class="px-6 py-2 bg-red-300 text-red-900 rounded-lg hover:bg-red-400">
+          Cancel
+        </button>
+
+        <button class="px-6 py-2 bg-green-300 text-green-900 rounded-lg hover:bg-green-400">
+          Save
+        </button>
+
+        <button class="px-6 py-2 bg-blue-300 text-blue-900 rounded-lg hover:bg-blue-400">
+          Create Company
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<app-sidebar class="md:hidden"></app-sidebar>

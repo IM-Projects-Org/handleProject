@@ -5,6 +5,7 @@ import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { UserDashboard } from './pages/user-dashboard/user-dashboard';
 import { AuthGuard } from './guards/auth-guard';
 import { AdminGuard } from './guards/admin-guard';
+import { OnboardCorporate } from './onboard-corporate/onboard-corporate';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,6 +24,11 @@ export const routes: Routes = [
     component: UserDashboard,
     canActivate: [AuthGuard]  // only logged in required
   },
+  {
+  path: 'onboard-corporate',
+  component: OnboardCorporate,
+  canActivate: [AdminGuard]
+},
 
   { path: '**', redirectTo: 'login' }
 ];

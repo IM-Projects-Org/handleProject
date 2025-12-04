@@ -1,1 +1,73 @@
-<p>admin-dashboard works!</p>
+<div class="flex min-h-screen">
+
+  <!-- Desktop Sidebar -->
+  <app-sidebar class="hidden md:block"></app-sidebar>
+
+  <!-- Main content area -->
+  <div class="flex-1 p-4 md:p-6 pb-20 md:pb-6">
+
+    <!-- ⭐ Your full dashboard content goes here -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+
+      <!-- CORPORATES -->
+      <div class="text-center border rounded-lg p-4 shadow-sm bg-white">
+        <button
+  routerLink="/onboard-corporate"
+  class="bg-blue-200 text-blue-900 font-medium px-4 py-2 rounded-md mb-3 hover:bg-blue-300"
+>
+  Onboard New Corporate
+</button>
+
+
+        <h3 class="bg-blue-600 text-white py-2 rounded-md font-semibold mb-3">
+          Active Corporates
+        </h3>
+
+        <ul class="space-y-2">
+          <li><a href="#" class="text-blue-600 hover:underline">Goldie</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">PM Electro Auto</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">R K Lights</a></li>
+        </ul>
+      </div>
+
+      <!-- TRADERS -->
+      <div class="text-center border rounded-lg p-4 shadow-sm bg-white">
+        <button class="bg-blue-200 text-blue-900 font-medium px-4 py-2 rounded-md mb-3 hover:bg-blue-300">
+          Onboard New Trader
+        </button>
+
+        <h3 class="bg-blue-600 text-white py-2 rounded-md font-semibold mb-3">
+          Active Traders
+        </h3>
+
+        <ul class="space-y-2">
+          <li><a href="#" class="text-blue-600 hover:underline">Solar Square</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Manishbhai</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Aarti</a></li>
+        </ul>
+      </div>
+
+      <!-- INTERMEDIARIES -->
+      <div class="text-center border rounded-lg p-4 shadow-sm bg-white">
+        <button class="bg-blue-200 text-blue-900 font-medium px-4 py-2 rounded-md mb-3 hover:bg-blue-300">
+          Onboard New Intermediary
+        </button>
+
+        <h3 class="bg-blue-600 text-white py-2 rounded-md font-semibold mb-3">
+          Active Intermediaries
+        </h3>
+
+        <ul class="space-y-2">
+          <li><a href="#" class="text-blue-600 hover:underline">Rohan</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Hiteshbhai</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Miteshbhai</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<app-sidebar class="md:hidden"></app-sidebar>
