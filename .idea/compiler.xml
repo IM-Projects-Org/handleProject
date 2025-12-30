@@ -11,6 +11,7 @@
           <entry name="$PROJECT_DIR$/handel" />
         </processorPath>
         <module name="eurekaService" />
+        <module name="eureka-service" />
       </profile>
       <profile name="Annotation profile for backend" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
